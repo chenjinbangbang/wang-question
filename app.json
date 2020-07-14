@@ -1,0 +1,16 @@
+{
+  "pages": [
+     "pages/index/index",
+    "pages/repely/repely"
+   
+    
+     
+   
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "真实段位测试",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,18 @@
+<view class="abs">
+	<view class="top">
+    测试你的隐藏段位
+	</view>
+
+  <view class="main">
+   第<text class="num">{{num}}/10问</text> {{array.content}}
+  </view>
+  <view class='views'>
+    <view tt-if='{{show!=0}}' style='font-size:17px'>请选择以下选项进行答题：</view>
+    <view id='{{item.num}}' bindtap="selectopt" class="{{item.opt}}" name='123' tt:for='{{list}}'>
+      <text class="nums">{{item.opt}}</text>
+      <text class="content">{{item.name}}</text>
+    </view>
+    <view class="title">答题完成可获得50-200铭文碎片</view>
+  </view>
+<view tt-if='{{show==0}}' class="lookvide" bindtap="defaultTap"><image src="/imgs/WechatIMG578.png" class="videoimgs" mode="" /> 看视频免费解锁结果</view>
+</view>

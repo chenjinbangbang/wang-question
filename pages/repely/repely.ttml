@@ -1,0 +1,16 @@
+<canvas canvas-id="canvas" style="width:100%;height:{{windowHeight}}px" />
+<view class="box" tt-if='{{shows==0}}'>
+  <view class="close" bindtap='close'>X</view>
+  <view class="txt">根据下面视频免费领取步骤：请观看下面视频</view>
+  <video autoplay='true' custom-cache='true' src="https://wwx.wwxcj.com/media/webimg/jiaoxue.mp4"></video>
+  <view class="conts">注：需要有熟练度英雄才可以领取，每天可以领取2次，总共500铭文</view>
+</view>
+<view class="bt">
+ <view class='save' catchtap='saveImage'><image src="/imgs/bc.png" mode="" /></view>
+ <view class='agin' bindtap="reso">
+    <image src="/imgs/zl.png" mode="" />
+  </view>
+ <view bindtap="getbanner" class="mw">
+    <image src="/imgs/lq.png" mode="" />
+  </view> 
+</view>
