@@ -12,7 +12,7 @@ Page({
     // setTimeout(() => {
     //   this.defaultTap()
     // },1000)
-    
+
     this.setData({
       show: 1
     })
@@ -22,7 +22,8 @@ Page({
         let data = {
           code: res.code
         }
-        http.http('/tt/user/login/do', 'post', data, (res) => {//获取用户openid
+        // http.http('/tt/user/login/do', 'post', data, (res) => {//获取用户openid
+        http.http('/auth/login', 'post', data, (res) => {//获取用户openid
           console.log('我请求成功了', res)
           tt.setStorageSync('openid', res.data);
           openid = res.data
@@ -39,7 +40,8 @@ Page({
           question: id,
           openid: res.data
         }
-        http.http('/tt/question/get', 'get', datas, (res) => {
+        // http.http('/tt/question/get', 'get', datas, (res) => {
+        http.http('/wang/request/list', 'get', datas, (res) => {
           console.log(res)
           let list = [{
             opt: 'A',
@@ -85,37 +87,47 @@ Page({
   selectopt(res) {//选择
 
     let id = res.currentTarget.id
-    let data = {
-      openid: openid,
-      question: this.data.num,
-      reply: id
+    this.data.num++;
+    if (this.data.num == 11) {
+      this.setData({
+        show: 0
+      })
     }
-    http.http('/tt/question/reply/do', 'post', data, (res) => {
-      this.data.num++;
-      if (this.data.num == 11) {
-        this.setData({
-          show: 0
-        })
-      }
-      this.getdata(this.data.num);
-    })
+    this.getdata(this.data.num);
+
+
+    // let data = {
+    //   openid: openid,
+    //   question: this.data.num,
+    //   reply: id
+    // }
+    // http.http('/tt/question/reply/do', 'post', data, (res) => {
+    //   this.data.num++;
+    //   if (this.data.num == 11) {
+    //     this.setData({
+    //       show: 0
+    //     })
+    //   }
+    //   this.getdata(this.data.num);
+    // })
+
   },
   defaultTap: function () {//调用广告
-      // tt.navigateTo({
-      //   url: '/pages/repely/repely?num=' + numid+'&id=1' // 指定页面的url
-      // });
-      // return
+    // tt.navigateTo({
+    //   url: '/pages/repely/repely?num=' + numid+'&id=1' // 指定页面的url
+    // });
+    // return
     let banner = tt.createRewardedVideoAd({
       adUnitId: "63i8m7594deag4koqs",
       adIntervals: 30
     })
-    
+
     banner.show().then(() => {
       console.log("广告显示成功");
     }).catch(err => {
       console.log("广告组件出现问题", err);
       tt.navigateTo({
-        url: '/pages/repely/repely?num=' + numid+'&id=1' // 指定页面的url
+        url: '/pages/repely/repely?num=' + numid + '&id=1' // 指定页面的url
       });
     });
 
