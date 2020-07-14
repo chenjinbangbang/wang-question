@@ -1,11 +1,12 @@
 const app = getApp()
 import http from "../../utils/utils.js";
-let openid = ''
-let show = 0;
+// let openid = ''
+// let show = 0;
 let numid = ''
 Page({
   data: {
     num: 1,
+    show: false
   },
 
   onLoad: function () {
@@ -13,88 +14,94 @@ Page({
     //   this.defaultTap()
     // },1000)
 
-    this.setData({
-      show: 1
-    })
+    // this.setData({
+    //   show: 1
+    // })
+
     tt.login({
       success: (res) => {
         console.log('我要在不请求')
         let data = {
           code: res.code
         }
-        // http.http('/tt/user/login/do', 'post', data, (res) => {//获取用户openid
-        http.http('/auth/login', 'post', data, (res) => {//获取用户openid
+        // http.http('/tt/user/login/do', 'post', data, (res) => {//获取用户access_token
+        http.http('/auth/login', 'post', data, (res) => {//获取用户access_token
           console.log('我请求成功了', res)
-          tt.setStorageSync('openid', res.data);
-          openid = res.data
-          this.getdata(this.data.num);
+          tt.setStorageSync('access_token', res.data.access_token);
+          this.getdata(1);
         })
       }
     });
   },
   getdata(id) {//获取题目
-    tt.getStorage({
-      key: 'openid', // 缓存数据的key
-      success: (res) => {
-        let datas = {
-          question: id,
-          openid: res.data
-        }
-        // http.http('/tt/question/get', 'get', datas, (res) => {
-        http.http('/wang/request/list', 'get', datas, (res) => {
-          console.log(res)
-          let list = [{
-            opt: 'A',
-            name: res.data.option1,
-            num: 1
-          },
-          {
-            opt: 'B',
-            num: 2,
-            name: res.data.option2,
-          },
-          {
-            opt: 'C',
-            num: 3,
-            name: res.data.option3,
-          },
-          {
-            opt: 'D',
-            num: 4,
-            name: res.data.option4,
-          },
-          ]
-          if (res.data.content) {
-            this.setData({
-              array: res.data,
-              list: list,
-            })
-          }
-          if (this.data.num == 11) {
-            numid = res.data
-            this.setData({
-              num: 10
-            })
-          } else {
-            this.setData({
-              num: this.data.num,
-            })
-          }
+    // tt.getStorage({
+    //   key: 'openid', // 缓存数据的key
+    //   success: (res) => {
+    let datas = {
+      question: id
+    }
+    // http.http('/tt/question/get', 'get', datas, (res) => {
+    http.http('/wang/request/list', 'get', datas, (res) => {
+      console.log(res)
+      let list = [{
+        opt: 'A',
+        name: res.data.option1,
+        num: 1
+      },
+      {
+        opt: 'B',
+        num: 2,
+        name: res.data.option2,
+      },
+      {
+        opt: 'C',
+        num: 3,
+        name: res.data.option3,
+      },
+      {
+        opt: 'D',
+        num: 4,
+        name: res.data.option4,
+      },
+      ]
+      if (res.data.content) {
+        this.setData({
+          array: res.data,
+          list: list,
         })
       }
-    });
+      if (this.data.num == 11) {
+        numid = res.data
+      }
+      // if (this.data.num == 11) {
+      //   numid = res.data
+      //   this.setData({
+      //     num: 10
+      //   })
+      // } else {
+      //   this.setData({
+      //     num: this.data.num + 1,
+      //   })
+      // }
+    })
+    //   }
+    // });
   },
   selectopt(res) {//选择
-
     let id = res.currentTarget.id
-    this.data.num++;
-    if (this.data.num == 11) {
+    // this.data.num++;
+    // console.log(this.data.num)
+
+    if (this.data.num < 10) {
       this.setData({
-        show: 0
+        num: this.data.num + 1,
+      })
+      this.getdata(this.data.num);
+    }else {
+      this.setData({
+        show: true
       })
     }
-    this.getdata(this.data.num);
-
 
     // let data = {
     //   openid: openid,
