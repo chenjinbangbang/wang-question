@@ -18,16 +18,19 @@ Page({
     //   show: 1
     // })
 
+    // http.http('/', 'GET', {}, (res) => {
+    //   console.log(res)
+    // })
+
     tt.login({
       success: (res) => {
-        console.log('我要在不请求')
         let data = {
           code: res.code
         }
         // http.http('/tt/user/login/do', 'post', data, (res) => {//获取用户access_token
         http.http('/auth/login', 'post', data, (res) => {//获取用户access_token
-          console.log('我请求成功了', res)
-          tt.setStorageSync('access_token', res.data.access_token);
+          console.log('登录成功', res)
+          // tt.setStorageSync('access_token', res.data.access_token);
           this.getdata(1);
         })
       }

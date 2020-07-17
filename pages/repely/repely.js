@@ -75,7 +75,8 @@ function saveImageToPhotosAlbum(option, pagethis) {
 let num = ''
 Page({
   data: {
-    bg: 'https://wwx.wwxcj.com/media/webimg/zuanshi.png',
+    // bg: 'https://wwx.wwxcj.com/media/webimg/zuanshi.png',
+    bg: 'https://wwx.wwxcj.com/static/imgs/zuanshi.png',
 
   },
   createCanvas(bg, headImg) {
@@ -204,7 +205,7 @@ Page({
               
             }) => {
             // console.log(avatarUrl,'我的图片1')
-            console.log('头像：', avatarUrl)
+            // console.log('头像：', avatarUrl)
             
               if (errMsg === 'getUserInfo:ok') {
                 this.setData({
@@ -260,27 +261,33 @@ Page({
     //  }
               
     if (num == 1 || num == 2 || num == 3 || num == 0) {
-      console.log('???')
-      bg = 'https://wwx.wwxcj.com/media/webimg/zuanshi.png'
+      // console.log('???')
+      // bg = 'https://wwx.wwxcj.com/media/webimg/zuanshi.png'
+      bg = 'https://wwx.wwxcj.com/static/imgs/zuanshi.png'
       // canvasText(ctx, '永恒钻石', '#ffffff', 30 * rateX, 145 * rateX, 370 * rateY)
 
 
     } else if (num == 4 || num == 5 || num == 6) {
       console.log(2)
 
-      bg = 'https://wwx.wwxcj.com/media/webimg/xingyao.png'
+      // bg = 'https://wwx.wwxcj.com/media/webimg/xingyao.png'
+      bg = 'https://wwx.wwxcj.com/static/imgs/xingyao.png'
       // canvasText(ctx, '至尊星耀', '#ffffff', 30 * rateX, 100 * rateX, 350 * rateY)
 
     } else if (num == 7 || num == 8) {
-      bg = 'https://wwx.wwxcj.com/media/webimg/wangzhe.png'
+      // bg = 'https://wwx.wwxcj.com/media/webimg/wangzhe.png'
+      bg = 'https://wwx.wwxcj.com/static/imgs/wangzhe.png'
       // canvasText(ctx, '最强王者x30', '#ffffff', 30 * rateX, 140 * rateX, 720 * rateY)
 
     } else if (num == 9 || num == 10) {
-      bg = 'https://wwx.wwxcj.com/media/webimg/rongyao.png'
+      // bg = 'https://wwx.wwxcj.com/media/webimg/rongyao.png'
+      bg = 'https://wwx.wwxcj.com/static/imgs/rongyao.png'
       // canvasText(ctx, '荣耀王者x66', '#ffffff', 30 * rateX, 140 * rateX, 720 * rateY)
     }
+    console.log(bg, avatarUrl)
 
     getImageInfo(bg).then(res => {
+      console.log(res)
       this.createCanvas(res.path, avatarUrl)
     })
     // this.createCanvas(bg, avatarUrl)
